@@ -202,3 +202,54 @@ footer .fine{border-top:1px solid #2a3b47;margin-top:40px;padding-top:20px;font-
 .trustbar span{line-height:1.4}
 section.hero2{padding:10px 0 20px}
 .hero2 .pic img{height:400px;object-position:50% 75%}
+
+/* Pacific Ridgeway partnership */
+.prw{display:flex;align-items:center;gap:8px;margin-left:18px;padding-left:18px;border-left:1px solid var(--line);text-decoration:none;color:#082B63;margin-right:auto}
+.prw-mtn{width:34px;height:20px;flex:0 0 34px}
+.prw span{font-family:Georgia,serif;font-weight:700;font-size:.82rem;letter-spacing:.12em;line-height:1.1}
+.prw small{display:block;font-family:var(--sans);font-weight:500;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#D4A12B}
+@media (max-width:1100px){.prw{display:none}}
+footer .partner{display:flex;gap:14px;align-items:center;margin-top:34px;padding-top:24px;border-top:1px solid #2a3b47}
+footer .partner .prw-mtn{width:48px;height:28px;flex:0 0 48px}
+footer .partner p{margin:0}
+footer .partner strong{color:#fff}
+footer .partner span{color:#D4A12B}
+.pay-partner{margin-top:8px;font-size:.85rem;color:var(--muted)}
+
+
+/* ===== Official Living Trust Advisor brand (Brand Quick Guide) =====
+   Colors: #284A62 slate, #9FC7E1 sky. Fonts: Raleway (display), Montserrat (Gotham substitute). */
+:root{
+  --ink:#1e3344; --muted:#5b6f7e; --navy:#284A62; --navy-2:#1f3b4f;
+  --gold:#9FC7E1; --gold-2:#3f7ea8; --cream:#f6f9fb; --sand:#eaf3f9; --line:#dbe7ef;
+  --serif:"Raleway",system-ui,sans-serif; --sans:"Montserrat",system-ui,sans-serif; --script:"Raleway",sans-serif;
+}
+h1,h2,h3{font-weight:600;letter-spacing:-.01em}
+.hero2 h1{font-weight:600}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:#86b7d8;color:var(--navy)}
+.menu .btn{color:var(--navy)}
+.script{font-family:"Raleway",sans-serif;font-style:italic;font-weight:300;color:var(--navy);letter-spacing:.01em}
+.cta .script{color:var(--gold)}
+.callbar .peace{font-size:1.7rem}
+.num{background:var(--navy)}
+.panel-head.gold{background:var(--gold)}
+.panel-head.gold h2{color:var(--navy)}
+.dot{color:var(--gold)}
+.ring{border-color:var(--gold);color:var(--navy)}
+.checklist li::before{background-color:var(--navy)}
+.eyebrow{color:var(--gold-2)}
+.trustbar svg{color:var(--gold-2)}
+.callbar a.bar svg,.callbar a.bar .ph{color:var(--gold)}
+.brand img{height:40px}
+.top{background:var(--navy)}
+footer{background:#1c3446}
+footer .fine,footer .partner{border-color:#2f4a5e}
+.card .ic{color:var(--navy)}
+.menu{gap:22px}
+.menu a{white-space:nowrap}
+.brand img{height:46px}
+.prw{margin-left:14px;padding-left:14px}
+@media (max-width:1250px){.prw{display:none}}
+.hero2 h1{font-size:clamp(2.4rem,5vw,4rem)}
+.prw small,.prw span{white-space:nowrap}
