@@ -1,4 +1,4 @@
-# trustadvisorchristyday.com
+# trustadvisorkristiday.com
 
 Kristi Day — Living Trust Advisor. Static site on GitHub Pages; payments via Stripe; data in Supabase.
 
