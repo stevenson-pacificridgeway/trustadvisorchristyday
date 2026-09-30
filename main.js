@@ -42,3 +42,27 @@ if (payForm) {
     }
   });
 }
+
+// Free consultation form -> Supabase lta-contact
+const cForm = document.getElementById("consult-form");
+if (cForm) {
+  cForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msg = cForm.querySelector(".form-msg"), btn = cForm.querySelector("button[type=submit]");
+    msg.textContent = "";
+    const d = Object.fromEntries(new FormData(cForm).entries());
+    d.consent = cForm.consent.checked;
+    if (!d.full_name || (!d.phone && !d.email)) { msg.textContent = "Please enter your name and a phone number or email."; return; }
+    if (!d.consent) { msg.textContent = "Please check the box so Kristi can contact you."; return; }
+    btn.disabled = true; btn.textContent = "Sending…";
+    try {
+      const r = await fetch("https://bshklbmraykqdmbrgtxc.supabase.co/functions/v1/lta-contact", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(d) });
+      const res = await r.json();
+      if (!r.ok) throw new Error(res.error || "Something went wrong.");
+      cForm.style.display = "none"; document.getElementById("consult-done").style.display = "block";
+    } catch (err) {
+      msg.textContent = err.message + " You can also call (858) 519-2297.";
+      btn.disabled = false; btn.textContent = "Request My Free Consultation";
+    }
+  });
+}
