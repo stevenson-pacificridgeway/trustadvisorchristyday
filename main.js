@@ -66,3 +66,32 @@ if (cForm) {
     }
   });
 }
+
+// California probate cost calculator (Probate Code §10810)
+const calc = document.getElementById("calc");
+if (calc) {
+  const num = (el) => Number(String(el.value).replace(/[^0-9.]/g, "")) || 0;
+  const fmt = (n) => "$" + Math.round(n).toLocaleString("en-US");
+  const fee = (g) => {
+    const tiers = [[100000, .04], [100000, .03], [800000, .02], [9000000, .01], [15000000, .005]];
+    let left = g, f = 0;
+    for (const [amt, r] of tiers) { const x = Math.min(left, amt); f += x * r; left -= x; if (left <= 0) break; }
+    return f;
+  };
+  const run = () => {
+    const g = num(document.getElementById("cv_home")) + num(document.getElementById("cv_other"));
+    const f = fee(g);
+    document.getElementById("co_gross").textContent = fmt(g);
+    document.getElementById("co_att").textContent = fmt(f);
+    document.getElementById("co_exe").textContent = fmt(f);
+    document.getElementById("co_total").textContent = fmt(f * 2);
+    document.getElementById("co_note").innerHTML = g <= 208850
+      ? "Under California's $208,850 small-estate limit, your family may be able to use a simplified procedure instead of full probate."
+      : "Over the $208,850 limit, your family would generally need full probate — typically 12–18 months. A funded living trust avoids it. <a href=\"index.html#consult\">Talk with Kristi</a>.";
+  };
+  calc.addEventListener("input", (e) => {
+    if (e.target.tagName === "INPUT") { const v = num(e.target); e.target.value = v ? v.toLocaleString("en-US") : ""; }
+    run();
+  });
+  run();
+}
