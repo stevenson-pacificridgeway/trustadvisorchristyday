@@ -61,7 +61,7 @@ if (cForm) {
       const res = await r.json();
       if (!r.ok) throw new Error(res.error || "Something went wrong.");
       cForm.style.display = "none"; document.getElementById("consult-done").style.display = "block";
-      if (window.gtag) gtag("event", "generate_lead", { form: "free_consultation" });
+      if (window.gtag) { gtag("event", "generate_lead", { form: "free_consultation" }); gtag("event", "qualify_lead", { form: "free_consultation" }); }
     } catch (err) {
       msg.textContent = err.message + " You can also call (858) 519-2297.";
       btn.disabled = false; btn.textContent = "Request My Free Consultation";
