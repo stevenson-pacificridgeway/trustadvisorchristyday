@@ -35,7 +35,8 @@ if (payForm) {
       const r = await fetch(FN, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(data) });
       const j = await r.json();
       if (!r.ok || !j.url) throw new Error(j.error || "Something went wrong.");
-      location.href = j.url;
+      if (window.gtag) gtag("event", "begin_checkout", { value: data.plan === "test" ? 1 : 3000, currency: "USD" });
+      setTimeout(() => { location.href = j.url; }, 300);
     } catch (err) {
       msg.textContent = err.message + " You can also call (858) 519-2297.";
       btn.disabled = false; btn.textContent = "Continue to Secure Payment";
@@ -60,6 +61,7 @@ if (cForm) {
       const res = await r.json();
       if (!r.ok) throw new Error(res.error || "Something went wrong.");
       cForm.style.display = "none"; document.getElementById("consult-done").style.display = "block";
+      if (window.gtag) gtag("event", "generate_lead", { form: "free_consultation" });
     } catch (err) {
       msg.textContent = err.message + " You can also call (858) 519-2297.";
       btn.disabled = false; btn.textContent = "Request My Free Consultation";
@@ -94,4 +96,15 @@ if (calc) {
     run();
   });
   run();
+}
+
+// Thank-you page: record purchase once per Stripe session
+if (location.pathname.endsWith("thank-you.html")) {
+  const sid = new URLSearchParams(location.search).get("session");
+  try {
+    if (sid && window.gtag && !localStorage.getItem("lta_p_" + sid)) {
+      gtag("event", "purchase", { transaction_id: sid, currency: "USD", value: 3000 });
+      localStorage.setItem("lta_p_" + sid, "1");
+    }
+  } catch (e) {}
 }
